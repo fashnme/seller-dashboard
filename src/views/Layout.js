@@ -6,7 +6,7 @@ import NotificationSystem from "react-notification-system";
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+// import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import { style } from "variables/Variables.js";
 
@@ -14,7 +14,7 @@ import routes from "routes.js";
 
 import image from "assets/img/sidebar-3.jpg";
 
-class Admin extends Component {
+class Layout extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -167,7 +167,7 @@ class Admin extends Component {
           />
           <Switch>{this.getRoutes(routes)}</Switch>
           <Footer />
-          <FixedPlugin
+          {/* <FixedPlugin
             handleImageClick={this.handleImageClick}
             handleColorClick={this.handleColorClick}
             handleHasImage={this.handleHasImage}
@@ -176,11 +176,11 @@ class Admin extends Component {
             mini={this.state["mini"]}
             handleFixedClick={this.handleFixedClick}
             fixedClasses={this.state.fixedClasses}
-          />
+          /> */}
         </div>
       </div>
     );
   }
 }
 
-export default Admin;
+export default Layout;

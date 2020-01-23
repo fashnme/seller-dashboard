@@ -2,10 +2,12 @@
 import React, { Component } from "react";
 import ChartistGraph from "react-chartist";
 import { Grid, Row, Col } from "react-bootstrap";
-
+import axios from "axios";
+import sharedVariable from '../shared/variables';
 import { Card } from "components/Card/Card.js";
 import { StatsCard } from "components/StatsCard/StatsCard.js";
 import { Tasks } from "components/Tasks/Tasks.js";
+
 import {
   dataPie,
   legendPie,
@@ -20,6 +22,15 @@ import {
 } from "variables/Variables.js";
 
 class Dashboard extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+    }
+  }
+
   createLegend(json) {
     var legend = [];
     for (var i = 0; i < json["names"].length; i++) {
@@ -30,6 +41,22 @@ class Dashboard extends Component {
     }
     return legend;
   }
+
+  componentDidMount() {
+
+    const { baseUrl, headers } = sharedVariable;
+    // console.log(baseUrl, headers);
+    axios.get(`${baseUrl}/seller/get-active-orders`, { headers })
+      .then(data => {
+        // console.log(data)
+        this.setState({ ...data.data.activeOrders })
+        console.log("logging state", JSON.stringify(this.state, undefined, 2))
+      })
+      .catch(err => console.log(err.message));
+
+
+  }
+
   render() {
     return (
       <div className="content">
@@ -38,8 +65,8 @@ class Dashboard extends Component {
             <Col lg={3} sm={6}>
               <StatsCard
                 bigIcon={<i className="pe-7s-server text-warning" />}
-                statsText="Capacity"
-                statsValue="105GB"
+                statsText="Active Orders"
+                statsValue={this.state.count}
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText="Updated now"
               />
@@ -47,8 +74,8 @@ class Dashboard extends Component {
             <Col lg={3} sm={6}>
               <StatsCard
                 bigIcon={<i className="pe-7s-wallet text-success" />}
-                statsText="Revenue"
-                statsValue="$1,345"
+                statsText="Order Amount"
+                statsValue={this.state.ordersAmount}
                 statsIcon={<i className="fa fa-calendar-o" />}
                 statsIconText="Last day"
               />
@@ -56,8 +83,8 @@ class Dashboard extends Component {
             <Col lg={3} sm={6}>
               <StatsCard
                 bigIcon={<i className="pe-7s-graph1 text-danger" />}
-                statsText="Errors"
-                statsValue="23"
+                statsText="Inventory"
+                statsValue=""
                 statsIcon={<i className="fa fa-clock-o" />}
                 statsIconText="In the last hour"
               />
@@ -65,8 +92,8 @@ class Dashboard extends Component {
             <Col lg={3} sm={6}>
               <StatsCard
                 bigIcon={<i className="fa fa-twitter text-info" />}
-                statsText="Followers"
-                statsValue="+45"
+                statsText="Product Likes"
+                statsValue="45"
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText="Updated now"
               />
