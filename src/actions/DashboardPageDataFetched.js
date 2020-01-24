@@ -1,4 +1,4 @@
-import sharedVariables from './../shared/variables';
+import sharedVariables from './../variables/shared';
 import { DASHBOARD_PAGE_DATA_FETCHED, DASHBOARD_TOGGLE_LOADING } from './../types';
 
 import axios from 'axios';
