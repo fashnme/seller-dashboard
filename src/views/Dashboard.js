@@ -1,9 +1,8 @@
-
 import React, { Component } from "react";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import ChartistGraph from "react-chartist";
 import { Grid, Row, Col } from "react-bootstrap";
-import axios from "axios";
-import sharedVariable from '../shared/variables';
 import { Card } from "components/Card/Card.js";
 import { StatsCard } from "components/StatsCard/StatsCard.js";
 import { Tasks } from "components/Tasks/Tasks.js";
@@ -21,16 +20,11 @@ import {
   legendBar
 } from "variables/Variables.js";
 
-class Dashboard extends Component {
+import { dashboardPageDataFetch } from './../actions';
 
-  constructor(props) {
-    super(props);
+export class Dashboard extends Component {
 
-    this.state = {
-
-    }
-  }
-
+  
   createLegend(json) {
     var legend = [];
     for (var i = 0; i < json["names"].length; i++) {
@@ -43,59 +37,42 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-
-    const { baseUrl, headers } = sharedVariable;
-    // console.log(baseUrl, headers);
-    axios.get(`${baseUrl}/seller/get-active-orders`, { headers })
-      .then(data => {
-        // console.log(data)
-        this.setState({ ...data.data.activeOrders })
-        console.log("logging state", JSON.stringify(this.state, undefined, 2))
-      })
-      .catch(err => console.log(err.message));
-
-
+    this.props.dashboardPageDataFetch();
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="content">
         <Grid fluid>
           <Row>
-            <Col lg={3} sm={6}>
+            <Col lg={4} sm={6}>
               <StatsCard
-                bigIcon={<i className="pe-7s-server text-warning" />}
+                bigIcon={<i className="pe-7s-graph1 text-danger" />}
+
                 statsText="Active Orders"
-                statsValue={this.state.count}
+                statsValue={this.props.dashboardData.dashboardData.count}
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText="Updated now"
               />
             </Col>
-            <Col lg={3} sm={6}>
+            <Col lg={4} sm={6}>
               <StatsCard
                 bigIcon={<i className="pe-7s-wallet text-success" />}
                 statsText="Order Amount"
-                statsValue={this.state.ordersAmount}
+                statsValue={this.props.dashboardData.dashboardData.ordersAmount}
                 statsIcon={<i className="fa fa-calendar-o" />}
                 statsIconText="Last day"
               />
             </Col>
-            <Col lg={3} sm={6}>
+            <Col lg={4} sm={6}>
               <StatsCard
-                bigIcon={<i className="pe-7s-graph1 text-danger" />}
+                bigIcon={<i className="pe-7s-server text-warning" />}
+
                 statsText="Inventory"
                 statsValue=""
                 statsIcon={<i className="fa fa-clock-o" />}
                 statsIconText="In the last hour"
-              />
-            </Col>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="fa fa-twitter text-info" />}
-                statsText="Product Likes"
-                statsValue="45"
-                statsIcon={<i className="fa fa-refresh" />}
-                statsIconText="Updated now"
               />
             </Col>
           </Row>
@@ -104,8 +81,8 @@ class Dashboard extends Component {
               <Card
                 statsIcon="fa fa-history"
                 id="chartHours"
-                title="Users Behavior"
-                category="24 Hours performance"
+                title="Weekly  Product Views"
+                category="Daily Performance"
                 stats="Updated 3 minutes ago"
                 content={
                   <div className="ct-chart">
@@ -189,4 +166,14 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+
+function mapStateToProps(state) {
+  return {
+    dashboardData: state.dashboardReducer
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ dashboardPageDataFetch }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
