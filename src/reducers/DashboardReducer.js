@@ -1,6 +1,6 @@
 import {
     DASHBOARD_PAGE_DATA_FETCHED, DASHBOARD_TOGGLE_LOADING
-  } from './../types';
+  } from '../action-types';
   
   
   const INITIAL_STATE = {
