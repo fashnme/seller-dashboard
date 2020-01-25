@@ -1,11 +1,39 @@
 
 import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Card from "components/Card/Card.js";
-import { thArray, tdArray } from "variables/Variables.js";
+import { thArray } from "variables/Variables.js";
+import { ordersPageDataFetch } from '../actions';
 
 class TableList extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      tdArray: []
+    }
+  }
+
+  componentDidMount() {
+
+    this.props.ordersPageDataFetch();
+    const { isLoading, ordersData } = this.props.orders;
+
+    if (!isLoading) {
+
+      console.log("-->", ordersData.ordersInfo);
+      const tdArray = ordersData.ordersInfo.map((element, index) => {
+        const { orderId, orderCreated, orderAmount } = element;
+        const productIds = element.products.map(item => item.productId).join(', ')
+        return [index, orderId, orderCreated, productIds, orderAmount];
+      })
+      this.setState({ tdArray });
+
+    }
+  }
+
   render() {
     return (
       <div className="content">
@@ -13,7 +41,7 @@ class TableList extends Component {
           <Row>
             <Col md={12}>
               <Card
-                title="Striped Table with Hover"
+                title="Active Orders"
                 category="Here is a subtitle for this table"
                 ctTableFullWidth
                 ctTableResponsive
@@ -27,7 +55,7 @@ class TableList extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {tdArray.map((prop, key) => {
+                      {this.state.tdArray.map((prop, key) => {
                         return (
                           <tr key={key}>
                             {prop.map((prop, key) => {
@@ -45,7 +73,7 @@ class TableList extends Component {
             <Col md={12}>
               <Card
                 plain
-                title="Striped Table with Hover"
+                title="Active Orders"
                 category="Here is a subtitle for this table"
                 ctTableFullWidth
                 ctTableResponsive
@@ -59,7 +87,7 @@ class TableList extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {tdArray.map((prop, key) => {
+                      {this.state.tdArray.map((prop, key) => {
                         return (
                           <tr key={key}>
                             {prop.map((prop, key) => {
@@ -80,4 +108,13 @@ class TableList extends Component {
   }
 }
 
-export default TableList;
+function mapStateToProps(state) {
+  return {
+    orders: state.ordersReducer
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ ordersPageDataFetch }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TableList);
