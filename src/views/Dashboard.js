@@ -20,7 +20,7 @@ import {
   legendBar
 } from "variables/Variables.js";
 
-import { dashboardPageDataFetch } from '../ActionCreators';
+import { dashboardPageDataFetch } from '../actions';
 
 export class Dashboard extends Component {
 

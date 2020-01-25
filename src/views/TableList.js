@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Card from "components/Card/Card.js";
 import { thArray } from "variables/Variables.js";
-import { ordersPageDataFetch } from '../ActionCreators';
+import { ordersPageDataFetch } from '../actions';
 
 class TableList extends Component {
 
@@ -23,14 +23,14 @@ class TableList extends Component {
 
     if (!isLoading) {
 
-      // console.log("-->", ordersData.ordersInfo);
+      console.log("-->", ordersData.ordersInfo);
       const tdArray = ordersData.ordersInfo.map((element, index) => {
         const { orderId, orderCreated, orderAmount } = element;
         const productIds = element.products.map(item => item.productId).join(', ')
         return [index, orderId, orderCreated, productIds, orderAmount];
       })
-
       this.setState({ tdArray });
+
     }
   }
 

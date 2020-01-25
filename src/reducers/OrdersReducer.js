@@ -1,4 +1,4 @@
-import * as ActionTypes from './../action-types';
+import * as ActionTypes from '../action-types';
 
 export default (state = {
   isLoading: true,
