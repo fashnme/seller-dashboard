@@ -1,5 +1,7 @@
 
 import React, { Component } from "react";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
   Grid,
   Row,
@@ -13,10 +15,16 @@ import { Card } from "components/Card/Card.js";
 import { FormInputs } from "components/FormInputs/FormInputs.js";
 import { UserCard } from "components/UserCard/UserCard.js";
 import Button from "components/CustomButton/CustomButton.js";
-
-import avatar from "assets/img/faces/face-3.jpg";
+import { profilePageDataFetch } from '../actions/ProfilePageDataFetched';
 
 class UserProfile extends Component {
+
+
+  componentDidMount() {
+    this.props.profilePageDataFetch();
+    console.log(this.props.profile);
+  }
+
   render() {
     return (
       <div className="content">
@@ -136,7 +144,7 @@ class UserProfile extends Component {
             <Col md={4}>
               <UserCard
                 bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-                avatar={avatar}
+                avatar="https://p16.muscdn.com/img/musically-maliva-obj/1646185398498309~c5_220x220.jpeg"
                 name="Mike Andrew"
                 userName="michael24"
                 description={
@@ -170,4 +178,14 @@ class UserProfile extends Component {
   }
 }
 
-export default UserProfile;
+function mapStateToProps(state) {
+  return {
+    profile: state.profileReducer
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ profilePageDataFetch }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+
