@@ -21,13 +21,10 @@ export const profilePageDataFetch = () => (dispatch) => {
     dispatch(profileLoading());
 
     const { headers, baseUrl } = sharedVariables;
-    axios.get(`${baseUrl}/user/get-user-profile/`, {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiUERvNWdtOEJNZ0tZWjFQNFlobFoiLCJpYXQiOjE1Nzg0ODgzODF9.f_0FHHWMZ1Javvvmtl72yO5m_1pICYjggYZA0-ccFQM'
-    })
+    axios.get(`${baseUrl}/seller/get-seller-profile/`, { headers })
         .then(profile => {
-            console.log("axios fetched: ", profile)
-            // dispatch(profileFetched(profile.data.user))
+            // console.log("axios fetched: ", profile)
+            dispatch(profileFetched(profile.data.seller))
         })
         .catch(error => dispatch(profileFailed(error.message)));
 }

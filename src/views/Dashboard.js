@@ -169,7 +169,7 @@ export class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    dashboardData: state.dashboardReducer
+    dashboardData: state.DashboardReducer
   }
 }
 

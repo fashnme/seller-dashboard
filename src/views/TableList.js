@@ -23,7 +23,7 @@ class TableList extends Component {
 
         if (!isLoading) {
 
-            console.log("-->", ordersData.ordersInfo);
+            // console.log("Orders-->", ordersData.ordersInfo);
             const tdArray = ordersData.ordersInfo.map((element, index) => {
                 const { orderId, orderCreated, orderAmount } = element;
                 const productIds = element.products.map(item => item.productId).join(', ')
@@ -110,7 +110,7 @@ class TableList extends Component {
 
 function mapStateToProps(state) {
     return {
-        orders: state.ordersReducer
+        orders: state.OrdersReducer
     }
 }
 

@@ -6,3 +6,6 @@ export const ORDERS_FAILED = 'orders_failed';
 export const PROFILE_LOADING = 'profile_loading';
 export const PROFILE_FETCHED = 'profile_fetched';
 export const PROFILE_FAILED = 'profile_failed';
+export const INVENTORY_LOADING = 'inventory_loading';
+export const INVENTORY_FETCHED = 'inventory_fetched';
+export const INVENTORY_FAILED = 'inventory_failed';

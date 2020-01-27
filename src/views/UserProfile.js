@@ -19,13 +19,41 @@ import { profilePageDataFetch } from '../actions/ProfilePageDataFetched';
 
 class UserProfile extends Component {
 
+  constructor(props) {
+
+    super(props);
+    this.state = {
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    const value = e.target.value;
+    const name = e.target.name;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(JSON.stringify(this.state, undefined, 2));
+  }
 
   componentDidMount() {
     this.props.profilePageDataFetch();
-    console.log(this.props.profile);
+    // console.log("UserProfile-->", this.props.profile.profileData);
+    const { isLoading, profileData } = this.props.profile;
+    if (!isLoading) {
+      // console.log(profileData);
+      this.setState(profileData);
+    }
   }
 
   render() {
+
     return (
       <div className="content">
         <Grid fluid>
@@ -34,30 +62,28 @@ class UserProfile extends Component {
               <Card
                 title="Edit Profile"
                 content={
-                  <form>
+                  <form onSubmit={this.handleSubmit}>
                     <FormInputs
-                      ncols={["col-md-5", "col-md-3", "col-md-4"]}
+                      ncols={["col-md-6", "col-md-6"]}
                       properties={[
                         {
-                          label: "Company (disabled)",
+                          label: "Seller Name",
+                          name: "sellerName",
+                          onChange: this.handleChange,
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "Company",
-                          defaultValue: "Creative Code Inc.",
+                          placeholder: "Seller Name",
+                          value: this.state.sellerName || '',
                           disabled: true
-                        },
-                        {
-                          label: "Username",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Username",
-                          defaultValue: "michael23"
                         },
                         {
                           label: "Email address",
                           type: "email",
+                          name: "email",
+                          onChange: this.handleChange,
                           bsClass: "form-control",
-                          placeholder: "Email"
+                          placeholder: "Email",
+                          value: this.state.email || ''
                         }
                       ]}
                     />
@@ -67,16 +93,35 @@ class UserProfile extends Component {
                         {
                           label: "First name",
                           type: "text",
+                          name: "firstName",
+                          onChange: this.handleChange,
                           bsClass: "form-control",
                           placeholder: "First name",
-                          defaultValue: "Mike"
+                          value: this.state.firstName || ''
                         },
                         {
                           label: "Last name",
                           type: "text",
+                          name: "lastName",
+                          onChange: this.handleChange,
                           bsClass: "form-control",
                           placeholder: "Last name",
-                          defaultValue: "Andrew"
+                          value: this.state.lastName || ''
+                        }
+                      ]}
+                    />
+                    <FormInputs
+                      ncols={["col-md-12"]}
+                      properties={[
+                        {
+                          label: "Phone No.",
+                          type: "text",
+                          name: "phoneNo",
+                          onChange: this.handleChange,
+                          bsClass: "form-control",
+                          placeholder: "Phone No.",
+                          value: this.state.phoneNo || '',
+                          disabled: true
                         }
                       ]}
                     />
@@ -86,35 +131,43 @@ class UserProfile extends Component {
                         {
                           label: "Adress",
                           type: "text",
+                          name: "address",
+                          onChange: this.handleChange,
                           bsClass: "form-control",
                           placeholder: "Home Adress",
-                          defaultValue:
-                            "Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                          value: this.state.address || ''
                         }
                       ]}
                     />
+
                     <FormInputs
                       ncols={["col-md-4", "col-md-4", "col-md-4"]}
                       properties={[
                         {
                           label: "City",
                           type: "text",
+                          name: "city",
+                          onChange: this.handleChange,
                           bsClass: "form-control",
                           placeholder: "City",
-                          defaultValue: "Mike"
+                          value: this.state.city || ''
                         },
                         {
                           label: "Country",
                           type: "text",
+                          name: "country",
+                          onChange: this.handleChange,
                           bsClass: "form-control",
                           placeholder: "Country",
-                          defaultValue: "Andrew"
+                          value: this.state.country || ''
                         },
                         {
                           label: "Postal Code",
+                          name: "postalCode",
                           type: "number",
+                          onChange: this.handleChange,
                           bsClass: "form-control",
-                          placeholder: "ZIP Code"
+                          value: this.state.postalCode || ''
                         }
                       ]}
                     />
@@ -125,10 +178,12 @@ class UserProfile extends Component {
                           <ControlLabel>About Me</ControlLabel>
                           <FormControl
                             rows="5"
+                            name="about"
                             componentClass="textarea"
                             bsClass="form-control"
                             placeholder="Here can be your description"
-                            defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
+                            onChange={this.handleChange}
+                            value={this.state.about || ''}
                           />
                         </FormGroup>
                       </Col>
@@ -145,17 +200,9 @@ class UserProfile extends Component {
               <UserCard
                 bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
                 avatar="https://p16.muscdn.com/img/musically-maliva-obj/1646185398498309~c5_220x220.jpeg"
-                name="Mike Andrew"
-                userName="michael24"
-                description={
-                  <span>
-                    "Lamborghini Mercy
-                    <br />
-                    Your chick she so thirsty
-                    <br />
-                    I'm in that two seat Lambo"
-                  </span>
-                }
+                name={this.state.firstName + " " + this.state.lastName}
+                userName={this.state.sellerName}
+                description={this.state.about}
                 socials={
                   <div>
                     <Button simple>
@@ -180,7 +227,7 @@ class UserProfile extends Component {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profileReducer
+    profile: state.ProfileReducer
   }
 }
 
