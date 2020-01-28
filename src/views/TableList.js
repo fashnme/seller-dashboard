@@ -9,102 +9,99 @@ import { ordersPageDataFetch } from '../actions';
 
 class TableList extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            tdArray: []
-        }
+    componentDidMount() {
+        this.props.ordersPageDataFetch();
     }
 
-    componentDidMount() {
+    render() {
 
-        this.props.ordersPageDataFetch();
-        const { isLoading, ordersData } = this.props.orders;
+        if (this.props.orders.isLoading) {
+            return (
+                <div className="text-center">
+                    <h2>Loading.....</h2>
+                </div>
+            )
+        }
 
-        if (!isLoading) {
+        else {
 
-            // console.log("Orders-->", ordersData.ordersInfo);
-            const tdArray = ordersData.ordersInfo.map((element, index) => {
+            const tdArray = this.props.orders.ordersData.ordersInfo.map((element, index) => {
                 const { orderId, orderCreated, orderAmount } = element;
                 const productIds = element.products.map(item => item.productId).join(', ')
                 return [index, orderId, orderCreated, productIds, orderAmount];
             })
-            this.setState({ tdArray });
 
+            return (
+                <div className="content">
+                    <Grid fluid>
+                        <Row>
+                            <Col md={12}>
+                                <Card
+                                    title="Active Orders"
+                                    category="Here is a subtitle for this table"
+                                    ctTableFullWidth
+                                    ctTableResponsive
+                                    content={
+                                        <Table striped hover>
+                                            <thead>
+                                                <tr>
+                                                    {thArray.map((prop, key) => {
+                                                        return <th key={key}>{prop}</th>;
+                                                    })}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {tdArray.map((prop, key) => {
+                                                    return (
+                                                        <tr key={key}>
+                                                            {prop.map((prop, key) => {
+                                                                return <td key={key}>{prop}</td>;
+                                                            })}
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </Table>
+                                    }
+                                />
+                            </Col>
+
+                            <Col md={12}>
+                                <Card
+                                    plain
+                                    title="Active Orders"
+                                    category="Here is a subtitle for this table"
+                                    ctTableFullWidth
+                                    ctTableResponsive
+                                    content={
+                                        <Table hover>
+                                            <thead>
+                                                <tr>
+                                                    {thArray.map((prop, key) => {
+                                                        return <th key={key}>{prop}</th>;
+                                                    })}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {tdArray.map((prop, key) => {
+                                                    return (
+                                                        <tr key={key}>
+                                                            {prop.map((prop, key) => {
+                                                                return <td key={key}>{prop}</td>;
+                                                            })}
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </Table>
+                                    }
+                                />
+                            </Col>
+                        </Row>
+                    </Grid>
+                </div>
+            );
         }
-    }
-
-    render() {
-        return (
-            <div className="content">
-                <Grid fluid>
-                    <Row>
-                        <Col md={12}>
-                            <Card
-                                title="Active Orders"
-                                category="Here is a subtitle for this table"
-                                ctTableFullWidth
-                                ctTableResponsive
-                                content={
-                                    <Table striped hover>
-                                        <thead>
-                                            <tr>
-                                                {thArray.map((prop, key) => {
-                                                    return <th key={key}>{prop}</th>;
-                                                })}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {this.state.tdArray.map((prop, key) => {
-                                                return (
-                                                    <tr key={key}>
-                                                        {prop.map((prop, key) => {
-                                                            return <td key={key}>{prop}</td>;
-                                                        })}
-                                                    </tr>
-                                                );
-                                            })}
-                                        </tbody>
-                                    </Table>
-                                }
-                            />
-                        </Col>
-
-                        <Col md={12}>
-                            <Card
-                                plain
-                                title="Active Orders"
-                                category="Here is a subtitle for this table"
-                                ctTableFullWidth
-                                ctTableResponsive
-                                content={
-                                    <Table hover>
-                                        <thead>
-                                            <tr>
-                                                {thArray.map((prop, key) => {
-                                                    return <th key={key}>{prop}</th>;
-                                                })}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {this.state.tdArray.map((prop, key) => {
-                                                return (
-                                                    <tr key={key}>
-                                                        {prop.map((prop, key) => {
-                                                            return <td key={key}>{prop}</td>;
-                                                        })}
-                                                    </tr>
-                                                );
-                                            })}
-                                        </tbody>
-                                    </Table>
-                                }
-                            />
-                        </Col>
-                    </Row>
-                </Grid>
-            </div>
-        );
     }
 }
 
