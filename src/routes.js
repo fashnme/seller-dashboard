@@ -1,10 +1,10 @@
 import Dashboard from "views/Dashboard.js";
 import UserProfile from "views/UserProfile.js";
-import TableList from "views/TableList.js";
-import Typography from "views/Typography.js";
 import Icons from "views/Icons.js";
 import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
+import Inventory from "views/Inventory";
+import Orders from "views/Orders";
 
 const dashboardRoutes = [
   {
@@ -22,17 +22,17 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/table",
-    name: "Table List",
+    path: "/orders",
+    name: "Orders",
     icon: "pe-7s-note2",
-    component: TableList,
+    component: Orders,
     layout: "/admin"
   },
   {
-    path: "/typography",
-    name: "Typography",
+    path: "/inventory",
+    name: "Inventory",
     icon: "pe-7s-news-paper",
-    component: Typography,
+    component: Inventory,
     layout: "/admin"
   },
   {

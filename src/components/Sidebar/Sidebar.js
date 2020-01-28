@@ -52,36 +52,39 @@ class Sidebar extends Component {
             href="#"
             className="logo-normal"
           >
-            <h5>Fashn Seller-Dashboard</h5>
+            <div style={{ color: "white", fontWeight: "400", fontSize: 18 }}>
+              Fashn<br />
+              Seller-Dashboard
+            </div>
           </a>
         </div>
-        <div className="sidebar-wrapper">
-          <ul className="nav">
-            {this.state.width <= 991 ? <AdminNavbarLinks /> : null}
-            {this.props.routes.map((prop, key) => {
-              if (!prop.redirect)
-                return (
-                  <li
-                    className={this.activeRoute(prop.layout + prop.path)}
-                    key={key}
-                  >
-                    <NavLink
-                      to={prop.layout + prop.path}
-                      className="nav-link"
-                      activeClassName="active"
+          <div className="sidebar-wrapper">
+            <ul className="nav">
+              {this.state.width <= 991 ? <AdminNavbarLinks /> : null}
+              {this.props.routes.map((prop, key) => {
+                if (!prop.redirect)
+                  return (
+                    <li
+                      className={this.activeRoute(prop.layout + prop.path)}
+                      key={key}
                     >
-                      <i className={prop.icon} />
-                      <p>{prop.name}</p>
-                    </NavLink>
-                  </li>
-                );
-              return null;
-            })}
-          </ul>
+                      <NavLink
+                        to={prop.layout + prop.path}
+                        className="nav-link"
+                        activeClassName="active"
+                      >
+                        <i className={prop.icon} />
+                        <p>{prop.name}</p>
+                      </NavLink>
+                    </li>
+                  );
+                return null;
+              })}
+            </ul>
+          </div>
         </div>
-      </div>
-    );
-  }
-}
-
-export default Sidebar;
+        );
+      }
+    }
+    
+    export default Sidebar;

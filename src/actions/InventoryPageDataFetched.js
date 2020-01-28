@@ -21,10 +21,10 @@ export const inventoryPageDataFetch = () => (dispatch) => {
     dispatch(inventoryLoading());
 
     const { headers, baseUrl } = sharedVariables;
-    axios.get(`${baseUrl}/seller/get-seller-inventory/`, { headers })
+    axios.get(`${baseUrl}/seller/get-inventory/`, { headers })
         .then(inventory => {
-            // console.log("axios fetched: ", inventory)
-            dispatch(inventoryFetched(inventory.data.seller))
+            console.log("inventory fetched: ", inventory.data.inventory)
+            dispatch(inventoryFetched(inventory.data.inventory))
         })
         .catch(error => dispatch(inventoryFailed(error.message)));
 }

@@ -207,7 +207,7 @@ class UserProfile extends Component {
 											</Row>
 											<Button bsStyle="info" pullRight fill type="submit">
 												Update Profile
-                    </Button>
+                    						</Button>
 											<div className="clearfix" />
 										</form>
 									}
