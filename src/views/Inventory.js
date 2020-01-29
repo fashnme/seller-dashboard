@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Card from "components/Card/Card.js";
 import { inventoryPageDataFetch } from '../actions';
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, NavLink } from "react-router-dom";
 import AddProduct from "./AddProduct";
 
 
@@ -74,6 +74,19 @@ class Inventory extends Component {
                                                             {prop.map((prop, key) => {
                                                                 return <td key={key}>{prop}</td>;
                                                             })}
+                                                            <td><Link
+                                                                to={{
+                                                                    pathname: "inventory/edit-product",
+                                                                    state: {prop}
+                                                                }}
+                                                            >
+                                                                <Button
+                                                                    bsStyle="primary"
+                                                                    bsSize="xs"
+                                                                    fill
+                                                                    style={{ margin: 10 }}
+                                                                >edit</Button>
+                                                            </Link></td>
                                                         </tr>
                                                     );
                                                 })}

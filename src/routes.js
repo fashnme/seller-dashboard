@@ -6,6 +6,7 @@ import Notifications from "views/Notifications.js";
 import Inventory from "views/Inventory";
 import Orders from "views/Orders";
 import AddProduct from "views/AddProduct";
+import EditProduct from "views/EditProduct";
 
 const dashboardRoutes = [
   {
@@ -60,9 +61,15 @@ const dashboardRoutes = [
   {
     path: "/inventory/add-product",
     name: "Add Product",
-    icon: "pe-7s-cart",
     invisible: true,
     component: AddProduct,
+    layout: "/admin"
+  },
+  {
+    path: "/inventory/edit-product",
+    name: "Edit Product",
+    invisible: true,
+    component: EditProduct,
     layout: "/admin"
   }
 ];
