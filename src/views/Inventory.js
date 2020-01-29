@@ -1,11 +1,15 @@
 
 import React, { Component } from "react";
-import { Grid, Row, Col, Table, Button } from "react-bootstrap";
+import { Grid, Row, Col, Table } from "react-bootstrap";
+import Button from 'components/CustomButton/CustomButton';
 import { style } from './../variables/Variables';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Card from "components/Card/Card.js";
 import { inventoryPageDataFetch } from '../actions';
+import { Link, Route, Switch } from "react-router-dom";
+import AddProduct from "./AddProduct";
+
 
 class Inventory extends Component {
 
@@ -38,11 +42,12 @@ class Inventory extends Component {
                     <Grid fluid>
                         <Row>
                             <Col md={12}>
-                                <Card>
-                                    <Button>
-                                        Add Product
-                                    </Button>
-                                </Card>
+                                <Link to='inventory/add-product'>
+                                    <Button bsStyle="warning"
+                                        pullRight style={{ margin: "10px 0px 10px 0px" }}>
+                                        + Add Product
+                    			    </Button>
+                                </Link>
                             </Col>
                         </Row>
 

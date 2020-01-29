@@ -5,6 +5,7 @@ import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import Inventory from "views/Inventory";
 import Orders from "views/Orders";
+import AddProduct from "views/AddProduct";
 
 const dashboardRoutes = [
   {
@@ -31,7 +32,7 @@ const dashboardRoutes = [
   {
     path: "/inventory",
     name: "Inventory",
-    icon: "pe-7s-news-paper",
+    icon: "pe-7s-cart",
     component: Inventory,
     layout: "/admin"
   },
@@ -54,6 +55,14 @@ const dashboardRoutes = [
     name: "Notifications",
     icon: "pe-7s-bell",
     component: Notifications,
+    layout: "/admin"
+  },
+  {
+    path: "/inventory/add-product",
+    name: "Add Product",
+    icon: "pe-7s-cart",
+    invisible: true,
+    component: AddProduct,
     layout: "/admin"
   }
 ];
