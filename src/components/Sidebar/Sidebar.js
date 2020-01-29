@@ -48,15 +48,16 @@ class Sidebar extends Component {
                             <img src={logo} alt="logo_image" />
                         </div>
                     </a>
-                    <a
+                    <h6 className="m-auto">Fashn Seller Dashboard</h6>
+                    {/* <a
                         href="#"
                         className="logo-normal"
                     >
                         <div style={{ color: "white", fontWeight: "400", fontSize: 18 }}>
                             Fashn<br />
                             Seller-Dashboard
-            </div>
-                    </a>
+                        </div>
+                    </a> */}
                 </div>
                 <div className="sidebar-wrapper">
                     <ul className="nav">

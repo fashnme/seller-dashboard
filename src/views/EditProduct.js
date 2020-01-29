@@ -12,6 +12,7 @@ import {
 import { Card } from "components/Card/Card.js";
 import { FormInputs } from "components/FormInputs/FormInputs.js";
 import Button from "components/CustomButton/CustomButton.js";
+import { Link } from "react-router-dom";
 
 class EditProduct extends Component {
 
@@ -145,8 +146,13 @@ class EditProduct extends Component {
                                             </Col>
                                         </Row>
                                         <Button bsStyle="info" pullRight fill type="submit">
-                                            Edit Product
-                    						</Button>
+                                            Save Changes
+                    					</Button>
+                                        <Button bsStyle="warning" pullRight
+                                            style={{ margin: "0px 10px 0px 0px" }}
+                                            onClick={() => this.props.history.push('/admin/inventory')}>
+                                            Cancel
+                    					</Button>
                                         <div className="clearfix" />
                                     </form>
                                 }

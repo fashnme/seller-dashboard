@@ -136,7 +136,12 @@ class AddProduct extends Component {
                                         </Row>
                                         <Button bsStyle="info" pullRight fill type="submit">
                                             Add Product
-                    						</Button>
+                    					</Button>
+                                        <Button bsStyle="warning" pullRight
+                                            style={{ margin: "0px 10px 0px 0px" }}
+                                            onClick={() => this.props.history.push('/admin/inventory')}>
+                                            Cancel
+                    					</Button>
                                         <div className="clearfix" />
                                     </form>
                                 }

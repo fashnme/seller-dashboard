@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import Card from "components/Card/Card.js";
 import { inventoryPageDataFetch } from '../actions';
 import { Link, Route, Switch, NavLink } from "react-router-dom";
-import AddProduct from "./AddProduct";
 
 
 class Inventory extends Component {
@@ -84,7 +83,7 @@ class Inventory extends Component {
                                                                     bsStyle="primary"
                                                                     bsSize="xs"
                                                                     fill
-                                                                    style={{ margin: 10 }}
+                                                                    style={{ margin: 2 }}
                                                                 >edit</Button>
                                                             </Link></td>
                                                         </tr>
