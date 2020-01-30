@@ -68,12 +68,19 @@ let style = {
             left: "50%",
             marginLeft: -(defaultWidth / 2)
         },
-    },
+    },  
 
     vh: {
         minHeight: '80vh'
     },
-
+    toggleButton:{
+        color: 'grey',
+        fontSize: '35px',
+        position: 'absolute',
+        top:'5px', 
+        right: '10px',
+        border: 'none'
+    },
     NotificationItem: {
         DefaultStyle: {
             position: "relative",
@@ -508,7 +515,7 @@ let optionsSales = {
     showArea: false,
     height: "245px",
     axisX: {
-        showGrid: false
+        showContainer: false
     },
     lineSmooth: true,
     showLine: true,
@@ -559,7 +566,7 @@ let dataBar = {
 let optionsBar = {
     seriesBarDistance: 10,
     axisX: {
-        showGrid: false
+        showContainer: false
     },
     height: "245px"
 };

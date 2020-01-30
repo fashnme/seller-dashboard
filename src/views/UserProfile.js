@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
-	Grid,
+	Container,
 	Row,
 	Col,
 	FormGroup,
-	ControlLabel,
+	FormLabel,
 	FormControl
 } from "react-bootstrap";
 
@@ -73,7 +73,7 @@ class UserProfile extends Component {
 
 			return (
 				<div className="content">
-					<Grid fluid>
+					<Container fluid>
 						<Row>
 							<Col md={8}>
 								<Card
@@ -192,7 +192,7 @@ class UserProfile extends Component {
 											<Row>
 												<Col md={12}>
 													<FormGroup controlId="formControlsTextarea">
-														<ControlLabel>About Me</ControlLabel>
+														<FormLabel>About Me</FormLabel>
 														<FormControl
 															rows="5"
 															name="about"
@@ -205,7 +205,7 @@ class UserProfile extends Component {
 													</FormGroup>
 												</Col>
 											</Row>
-											<Button bsStyle="info" pullRight fill type="submit">
+											<Button variant="info" pullRight fill type="submit">
 												Update Profile
                     						</Button>
 											<div className="clearfix" />
@@ -236,7 +236,7 @@ class UserProfile extends Component {
 								/>
 							</Col>
 						</Row>
-					</Grid>
+					</Container>
 				</div>
 			);
 		}

@@ -66,7 +66,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/inventory/edit-product",
+    path: "/inventory/:id",
     name: "Edit Product",
     invisible: true,
     component: EditProduct,

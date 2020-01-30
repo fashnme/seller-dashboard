@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ChartistGraph from "react-chartist";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Card } from "components/Card/Card.js";
 import { StatsCard } from "components/StatsCard/StatsCard.js";
 import { Tasks } from "components/Tasks/Tasks.js";
@@ -44,7 +44,7 @@ export class Dashboard extends Component {
     console.log(this.props)
     return (
       <div className="content">
-        <Grid fluid>
+        <Container fluid>
           <Row>
             <Col lg={4} sm={6}>
               <StatsCard
@@ -160,7 +160,7 @@ export class Dashboard extends Component {
               />
             </Col>
           </Row>
-        </Grid>
+        </Container>
       </div>
     );
   }

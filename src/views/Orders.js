@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import { Grid, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 import { style } from './../variables/Variables';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -34,7 +34,7 @@ class Orders extends Component {
 
             return (
                 <div className="content" style={style.vh}>
-                    <Grid fluid>
+                    <Container fluid>
                         <Row>
                             <Col md={12}>
                                 <Card
@@ -67,7 +67,7 @@ class Orders extends Component {
                                 />
                             </Col>
                         </Row>
-                    </Grid>
+                    </Container>
                 </div>
             );
         }

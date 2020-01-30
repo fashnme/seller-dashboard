@@ -1,13 +1,13 @@
 
 import React, { Component } from "react";
-import { Grid, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 import Button from 'components/CustomButton/CustomButton';
 import { style } from './../variables/Variables';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Card from "components/Card/Card.js";
 import { inventoryPageDataFetch } from '../actions';
-import { Link, Route, Switch, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 class Inventory extends Component {
@@ -27,22 +27,17 @@ class Inventory extends Component {
         }
 
         else {
-
-            console.log("inventory props", this.props.inventory);
-            const thArray = ["title", "description", "discount", "brandName", "gender", "crossedPrice", "price", "ecommerce"];
-            const tdArray = this.props.inventory.inventoryData.map(item => {
-                const { title, description, discount, brandName, gender, crossedPrice, price, ecommerce } = item._source
-                return [title, description, discount, brandName, gender, crossedPrice, price, ecommerce]
-            })
-            // const tdArray = [];
+            const inventory = this.props.inventory.inventoryData;
+            console.log("inventory data", inventory);
+            const thArray = ["title", "price", "crossed price", "gender", "brand"];
 
             return (
                 <div className="content" style={style.vh}>
-                    <Grid fluid>
+                    <Container fluid>
                         <Row>
                             <Col md={12}>
                                 <Link to='inventory/add-product'>
-                                    <Button bsStyle="warning"
+                                    <Button variant="warning"
                                         pullRight style={{ margin: "10px 0px 10px 0px" }}>
                                         + Add Product
                     			    </Button>
@@ -67,25 +62,26 @@ class Inventory extends Component {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {tdArray.map((prop, key) => {
+                                                {inventory.map((row, key) => {
                                                     return (
                                                         <tr key={key}>
-                                                            {prop.map((prop, key) => {
-                                                                return <td key={key}>{prop}</td>;
-                                                            })}
-                                                            <td><Link
-                                                                to={{
-                                                                    pathname: "inventory/edit-product",
-                                                                    state: {prop}
-                                                                }}
-                                                            >
-                                                                <Button
-                                                                    bsStyle="primary"
-                                                                    bsSize="xs"
-                                                                    fill
-                                                                    style={{ margin: 2 }}
-                                                                >edit</Button>
-                                                            </Link></td>
+                                                            <td>{row.title}</td>
+                                                            <td>{row.price}</td>
+                                                            <td>{row.crossedPrice}</td>
+                                                            <td>{row.gender}</td>
+                                                            <td>{row.brandName}</td>
+                                                            <td>
+                                                                <Link
+                                                                    to={`inventory/${row.productId}`}
+                                                                >
+                                                                    <Button
+                                                                        variant="primary"
+                                                                    size="xs"
+                                                                        fill
+                                                                        style={{ margin: 2 }}
+                                                                    >edit</Button>
+                                                                </Link>
+                                                            </td>
                                                         </tr>
                                                     );
                                                 })}
@@ -95,7 +91,7 @@ class Inventory extends Component {
                                 />
                             </Col>
                         </Row>
-                    </Grid>
+                    </Container>
                 </div>
             );
         }

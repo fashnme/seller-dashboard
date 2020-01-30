@@ -49,15 +49,7 @@ class Sidebar extends Component {
                         </div>
                     </a>
                     <h6 className="m-auto">Fashn Seller Dashboard</h6>
-                    {/* <a
-                        href="#"
-                        className="logo-normal"
-                    >
-                        <div style={{ color: "white", fontWeight: "400", fontSize: 18 }}>
-                            Fashn<br />
-                            Seller-Dashboard
-                        </div>
-                    </a> */}
+                   
                 </div>
                 <div className="sidebar-wrapper">
                     <ul className="nav">
@@ -68,16 +60,18 @@ class Sidebar extends Component {
                             if (!prop.redirect)
                                 return (
                                     <li
+                                        style={{listStyle: 'none',float: 'left', padding: '5px'}}
                                         className={this.activeRoute(prop.layout + prop.path)}
                                         key={key}
                                     >
                                         <NavLink
+                                            style={{color: 'white', verticalAlign: 'middle', width: '100%'}}
                                             to={prop.layout + prop.path}
                                             className="nav-link"
                                             activeClassName="active"
                                         >
-                                            <i className={prop.icon} />
-                                            <p>{prop.name}</p>
+                                            <i  style={{ verticalAlign: 'middle'}} className={prop.icon} />
+                                            <p style={{display: 'inline'}}>{prop.name}</p>
                                         </NavLink>
                                     </li>
                                 );

@@ -1,11 +1,11 @@
 
 import React, { Component } from "react";
 import {
-    Grid,
+    Container,
     Row,
     Col,
     FormGroup,
-    ControlLabel,
+    FormLabel,
     FormControl
 } from "react-bootstrap";
 
@@ -46,7 +46,7 @@ class AddProduct extends Component {
     render() {
         return (
             <div className="content">
-                <Grid fluid>
+                <Container fluid>
                     <Row>
                         <Col md={8}>
                             <Card
@@ -121,7 +121,7 @@ class AddProduct extends Component {
                                         <Row>
                                             <Col md={12}>
                                                 <FormGroup controlId="formControlsTextarea">
-                                                    <ControlLabel>Description</ControlLabel>
+                                                    <FormLabel>Description</FormLabel>
                                                     <FormControl
                                                         rows="5"
                                                         name="desc"
@@ -134,10 +134,10 @@ class AddProduct extends Component {
                                                 </FormGroup>
                                             </Col>
                                         </Row>
-                                        <Button bsStyle="info" pullRight fill type="submit">
+                                        <Button variant="info" pullRight fill type="submit">
                                             Add Product
                     					</Button>
-                                        <Button bsStyle="warning" pullRight
+                                        <Button variant="warning" pullRight
                                             style={{ margin: "0px 10px 0px 0px" }}
                                             onClick={() => this.props.history.push('/admin/inventory')}>
                                             Cancel
@@ -148,7 +148,7 @@ class AddProduct extends Component {
                             />
                         </Col>
                     </Row>
-                </Grid>
+                </Container>
             </div>
         );
     }
