@@ -48,7 +48,7 @@ class Sidebar extends Component {
                             <img src={logo} alt="logo_image" />
                         </div>
                     </a>
-                    <h6 className="m-auto">Fashn Seller Dashboard</h6>
+                    <h6 className="mt-2">Fashn Seller Dashboard</h6>
                    
                 </div>
                 <div className="sidebar-wrapper">
@@ -60,18 +60,17 @@ class Sidebar extends Component {
                             if (!prop.redirect)
                                 return (
                                     <li
-                                        style={{listStyle: 'none',float: 'left', padding: '5px'}}
+                                        style={{width: '80%'}}
                                         className={this.activeRoute(prop.layout + prop.path)}
                                         key={key}
                                     >
                                         <NavLink
-                                            style={{color: 'white', verticalAlign: 'middle', width: '100%'}}
                                             to={prop.layout + prop.path}
                                             className="nav-link"
                                             activeClassName="active"
                                         >
-                                            <i  style={{ verticalAlign: 'middle'}} className={prop.icon} />
-                                            <p style={{display: 'inline'}}>{prop.name}</p>
+                                            <i className={prop.icon} />
+                                            <p>{prop.name}</p>
                                         </NavLink>
                                     </li>
                                 );
