@@ -9,8 +9,9 @@ function FieldGroup({ label, ...props }) {
             <FormGroup>
                 <FormLabel>{label}</FormLabel>
                 <FormControl {...props}>
-                    {props.options.map(item => {
-                        return <option>{item}</option>
+                    <option key="0" disabled>select</option>
+                    {props.options.map((item, key) => {
+                        return <option key={key}>{item}</option>
                     })}
                 </FormControl>
             </FormGroup>

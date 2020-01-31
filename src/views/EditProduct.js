@@ -24,12 +24,13 @@ class EditProduct extends Component {
 
         this.state = {
             loading: true,
+            err: null,
             formData: {}
         }
 
         axios.get(`${baseUrl}/product/fetch-product/?productId=${id}`, { headers })
             .then(productData => {
-                // console.log("product data recieved ", productData.data.product)
+                console.log("product data recieved ", productData.data.product)
                 productData.data.product.size = {
                     'm': 10,
                     'l': 7
@@ -39,6 +40,7 @@ class EditProduct extends Component {
                     formData: productData.data.product
                 })
             })
+            .catch(err => this.setState({ err: err.message }))
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -75,6 +77,13 @@ class EditProduct extends Component {
                 </div>
             )
         }
+        else if (this.state.err) {
+            return (
+                <div className="text-center">
+                    <h2>{this.state.err}</h2>
+                </div>
+            )
+        }
         else {
             return (
                 <div className="content">
@@ -93,7 +102,7 @@ class EditProduct extends Component {
                                                         name: "title",
                                                         onChange: this.handleChange,
                                                         type: "text",
-                                                        bsClass: "form-control",
+                                                        bsPrefix: "form-control",
                                                         placeholder: "Exotic Kutri",
                                                         value: this.state.formData.title || '',
                                                     },
@@ -102,7 +111,7 @@ class EditProduct extends Component {
                                                         type: "text",
                                                         name: "brand",
                                                         onChange: this.handleChange,
-                                                        bsClass: "form-control",
+                                                        bsPrefix: "form-control",
                                                         placeholder: "Levis",
                                                         value: this.state.formData.brandName || ''
                                                     }
@@ -116,7 +125,7 @@ class EditProduct extends Component {
                                                         type: "number",
                                                         name: "price",
                                                         onChange: this.handleChange,
-                                                        bsClass: "form-control",
+                                                        bsPrefix: "form-control",
                                                         placeholder: "2599",
                                                         disabled: true,
                                                         value: this.calculatePrice()
@@ -126,7 +135,7 @@ class EditProduct extends Component {
                                                         type: "number",
                                                         name: "crossedPrice",
                                                         onChange: this.handleChange,
-                                                        bsClass: "form-control",
+                                                        bsPrefix: "form-control",
                                                         placeholder: "2599",
                                                         value: this.state.formData.crossedPrice || ''
                                                     },
@@ -136,7 +145,7 @@ class EditProduct extends Component {
                                                         step: "0.1",
                                                         name: "discount",
                                                         onChange: this.handleChange,
-                                                        bsClass: "form-control",
+                                                        bsPrefix: "form-control",
                                                         placeholder: "7.5",
                                                         value: this.state.formData.discount || ''
                                                     },
@@ -146,7 +155,7 @@ class EditProduct extends Component {
                                                         name: "gender",
                                                         options: ["male", "female", "unisex"],
                                                         onChange: this.handleChange,
-                                                        bsClass: "form-control",
+                                                        bsPrefix: "form-control",
                                                         placeholder: "male",
                                                         value: this.state.formData.gender || '',
                                                     }
@@ -154,20 +163,44 @@ class EditProduct extends Component {
                                             />
 
                                             <Row>
-                                                <Col md={12}>
-                                                    {Object.entries(this.state.formData.size).map(([key, value]) => {
-                                                        return (
+                                                <Col xs={12}>
+                                                    <FormLabel>Sizes</FormLabel>
+                                                </Col>
+                                            </Row>
+
+                                            <Row>
+                                                {Object.entries(this.state.formData.size).map(([key, value]) => {
+                                                    return (
+                                                        <Col sm={3} key={key}>
                                                             <FormGroup>
                                                                 <FormLabel>{key}</FormLabel>
-                                                                <FormControl 
+                                                                <FormControl
                                                                     type="number"
                                                                     value={value}
+                                                                    onChange={this.handleChange}
                                                                 />
                                                             </FormGroup>
-                                                        )
+                                                        </Col>
+                                                    )
+                                                })}
+                                            </Row>
+
+                                            <Row>
+                                                <Col xs={12}>
+                                                    <FormLabel>Images</FormLabel>
+                                                </Col>
+                                            </Row>
+
+                                            <Row>
+                                                <Col xs={12}>
+                                                    {this.state.formData.imagesArray.map((image, key) => {
+                                                        return <img src={`https://${image}`}
+                                                            height="80px" width="80px"
+                                                            style={{ padding: 10 }} key={key} />
                                                     })}
                                                 </Col>
                                             </Row>
+
 
                                             <Row>
                                                 <Col md={12}>
@@ -176,11 +209,10 @@ class EditProduct extends Component {
                                                         <FormControl
                                                             rows="5"
                                                             name="desc"
-                                                            componentClass="textarea"
-                                                            bsClass="form-control"
+                                                            as="textarea"
                                                             placeholder="Here can be your description"
                                                             onChange={this.handleChange}
-                                                            value={this.state.formData.description}
+                                                            value={this.state.formData.description || ''}
                                                         />
                                                     </FormGroup>
                                                 </Col>
@@ -192,7 +224,7 @@ class EditProduct extends Component {
                                                 style={{ margin: "0px 10px 0px 0px" }}
                                                 onClick={() => this.props.history.push('/admin/inventory')}>
                                                 Cancel
-                    					</Button>
+                    					    </Button>
                                             <div className="clearfix" />
                                         </form>
                                     }

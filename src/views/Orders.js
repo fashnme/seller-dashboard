@@ -12,6 +12,7 @@ class Orders extends Component {
 
     componentDidMount() {
         this.props.ordersPageDataFetch();
+        console.log("orders", this.props.orders);
     }
 
     render() {
@@ -20,6 +21,13 @@ class Orders extends Component {
             return (
                 <div className="text-center">
                     <h2>Loading.....</h2>
+                </div>
+            )
+        }
+        else if (this.props.orders.errMess) {
+            return (
+                <div className="text-center">
+                    <h2>{this.props.orders.errMess}</h2>
                 </div>
             )
         }

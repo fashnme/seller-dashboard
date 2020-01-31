@@ -25,10 +25,16 @@ class Inventory extends Component {
                 </div>
             )
         }
+        else if (this.props.inventory.errMess) {
+            return (
+                <div className="text-center">
+                    <h2>{this.props.inventory.errMess}</h2>
+                </div>
+            )
+        }
 
         else {
             const inventory = this.props.inventory.inventoryData;
-            console.log("inventory data", inventory);
             const thArray = ["title", "price", "crossed price", "gender", "brand"];
 
             return (
@@ -36,7 +42,7 @@ class Inventory extends Component {
                     <Container fluid>
                         <Row>
                             <Col md={12}>
-                                <Link to='inventory/add-product'>
+                                <Link to='inventory/add'>
                                     <Button variant="warning"
                                         pullRight style={{ margin: "10px 0px 10px 0px" }}>
                                         + Add Product
@@ -72,11 +78,11 @@ class Inventory extends Component {
                                                             <td>{row.brandName}</td>
                                                             <td>
                                                                 <Link
-                                                                    to={`inventory/${row.productId}`}
+                                                                    to={`inventory/edit/${row.productId}`}
                                                                 >
                                                                     <Button
                                                                         variant="primary"
-                                                                    size="xs"
+                                                                        size="xs"
                                                                         fill
                                                                         style={{ margin: 2 }}
                                                                     >edit</Button>

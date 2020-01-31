@@ -59,14 +59,14 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/inventory/add-product",
+    path: "/inventory/add",
     name: "Add Product",
     invisible: true,
     component: AddProduct,
     layout: "/admin"
   },
   {
-    path: "/inventory/:id",
+    path: "/inventory/edit/:id",
     name: "Edit Product",
     invisible: true,
     component: EditProduct,
