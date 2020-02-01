@@ -43,8 +43,8 @@ class Header extends Component {
 
             <Navbar>
                 <Navbar.Brand href="#pablo">{this.props.brandText}</Navbar.Brand>
-                <Button style={style.toggleButton}  className="d-block d-sm-none" onClick={this.mobileSidebarToggle}>
-                    <i className="pe-7s-menu lg"></i>
+                <Button style={style.toggleButton} className="d-block d-sm-none" onClick={this.mobileSidebarToggle}>
+                    <i className="pe-7s-menu"></i>
                     </Button>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <AdminNavbarLinks />

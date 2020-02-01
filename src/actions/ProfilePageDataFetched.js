@@ -1,5 +1,5 @@
 import sharedVariables from '../variables/shared';
-import { PROFILE_LOADING, PROFILE_FAILED, PROFILE_FETCHED } from '../action-types';
+import { PROFILE_LOADING, PROFILE_FAILED, PROFILE_FETCHED, JWT_ARRIVED } from '../action-types';
 import axios from 'axios';
 
 export const profileLoading = () => ({

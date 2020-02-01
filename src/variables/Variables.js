@@ -75,10 +75,10 @@ let style = {
     },
     toggleButton:{
         color: 'grey',
-        fontSize: '35px',
+        fontSize: '30px',
         position: 'absolute',
-        top:'5px', 
-        right: '10px',
+        top:'0px', 
+        right: '0px',
         border: 'none'
     },
     NotificationItem: {

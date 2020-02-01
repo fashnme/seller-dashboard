@@ -12,6 +12,7 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers/index';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Login from './views/Login';
 
 
 
@@ -22,7 +23,9 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route path="/admin" render={props => <App {...props} />} />
-        <Redirect from="/" to="/admin/dashboard" />
+        <Route path="/login" render={() => <Login />} />
+        {/* <Redirect from="/" to="/admin/dashboard" /> */}
+        <Redirect from="/" to="/login" />
       </Switch>
     </BrowserRouter>
   </Provider>,
