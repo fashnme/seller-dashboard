@@ -11,7 +11,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers/index';
-import { BrowserRouter, Route, Switch, Redirect  } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Login from './views/Login';
 
 
 
@@ -19,10 +20,12 @@ const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
   <Provider store={store}>
-     <BrowserRouter>
+    <BrowserRouter>
       <Switch>
         <Route path="/admin" render={props => <App {...props} />} />
-        <Redirect from="/" to="/admin/dashboard" />
+        <Route path="/login" render={() => <Login />} />
+        {/* <Redirect from="/" to="/admin/dashboard" /> */}
+        <Redirect from="/" to="/login" />
       </Switch>
     </BrowserRouter>
   </Provider>,

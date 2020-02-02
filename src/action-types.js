@@ -9,3 +9,4 @@ export const PROFILE_FAILED = 'profile_failed';
 export const INVENTORY_LOADING = 'inventory_loading';
 export const INVENTORY_FETCHED = 'inventory_fetched';
 export const INVENTORY_FAILED = 'inventory_failed';
+export const JWT_ARRIVED = 'jwt_arrived';

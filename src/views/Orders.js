@@ -1,16 +1,18 @@
 
 import React, { Component } from "react";
-import { Grid, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
+import { style } from './../variables/Variables';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Card from "components/Card/Card.js";
 import { thArray } from "variables/Variables.js";
 import { ordersPageDataFetch } from '../actions';
 
-class TableList extends Component {
+class Orders extends Component {
 
     componentDidMount() {
         this.props.ordersPageDataFetch();
+        console.log("orders", this.props.orders);
     }
 
     render() {
@@ -19,6 +21,13 @@ class TableList extends Component {
             return (
                 <div className="text-center">
                     <h2>Loading.....</h2>
+                </div>
+            )
+        }
+        else if (this.props.orders.errMess) {
+            return (
+                <div className="text-center">
+                    <h2>{this.props.orders.errMess}</h2>
                 </div>
             )
         }
@@ -32,8 +41,8 @@ class TableList extends Component {
             })
 
             return (
-                <div className="content">
-                    <Grid fluid>
+                <div className="content" style={style.vh}>
+                    <Container fluid>
                         <Row>
                             <Col md={12}>
                                 <Card
@@ -65,40 +74,8 @@ class TableList extends Component {
                                     }
                                 />
                             </Col>
-
-                            <Col md={12}>
-                                <Card
-                                    plain
-                                    title="Active Orders"
-                                    category="Here is a subtitle for this table"
-                                    ctTableFullWidth
-                                    ctTableResponsive
-                                    content={
-                                        <Table hover>
-                                            <thead>
-                                                <tr>
-                                                    {thArray.map((prop, key) => {
-                                                        return <th key={key}>{prop}</th>;
-                                                    })}
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {tdArray.map((prop, key) => {
-                                                    return (
-                                                        <tr key={key}>
-                                                            {prop.map((prop, key) => {
-                                                                return <td key={key}>{prop}</td>;
-                                                            })}
-                                                        </tr>
-                                                    );
-                                                })}
-                                            </tbody>
-                                        </Table>
-                                    }
-                                />
-                            </Col>
                         </Row>
-                    </Grid>
+                    </Container>
                 </div>
             );
         }
@@ -114,4 +91,4 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ ordersPageDataFetch }, dispatch);
 }
-export default connect(mapStateToProps, mapDispatchToProps)(TableList);
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);

@@ -1,10 +1,12 @@
 import Dashboard from "views/Dashboard.js";
 import UserProfile from "views/UserProfile.js";
-import TableList from "views/TableList.js";
-import Typography from "views/Typography.js";
 import Icons from "views/Icons.js";
 import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
+import Inventory from "views/Inventory";
+import Orders from "views/Orders";
+import AddProduct from "views/AddProduct";
+import EditProduct from "views/EditProduct";
 
 const dashboardRoutes = [
   {
@@ -22,17 +24,17 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/table",
-    name: "Table List",
+    path: "/orders",
+    name: "Orders",
     icon: "pe-7s-note2",
-    component: TableList,
+    component: Orders,
     layout: "/admin"
   },
   {
-    path: "/typography",
-    name: "Typography",
-    icon: "pe-7s-news-paper",
-    component: Typography,
+    path: "/inventory",
+    name: "Inventory",
+    icon: "pe-7s-cart",
+    component: Inventory,
     layout: "/admin"
   },
   {
@@ -54,6 +56,20 @@ const dashboardRoutes = [
     name: "Notifications",
     icon: "pe-7s-bell",
     component: Notifications,
+    layout: "/admin"
+  },
+  {
+    path: "/inventory/add",
+    name: "Add Product",
+    invisible: true,
+    component: AddProduct,
+    layout: "/admin"
+  },
+  {
+    path: "/inventory/edit/:id",
+    name: "Edit Product",
+    invisible: true,
+    component: EditProduct,
     layout: "/admin"
   }
 ];

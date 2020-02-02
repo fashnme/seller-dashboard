@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
-	Grid,
+	Container,
 	Row,
 	Col,
 	FormGroup,
-	ControlLabel,
+	FormLabel,
 	FormControl
 } from "react-bootstrap";
 
@@ -71,9 +71,17 @@ class UserProfile extends Component {
 				});
 			}
 
+			else if (this.props.profile.errMess) {
+				return (
+					<div className="text-center">
+						<h2>{this.props.profile.errMess}</h2>
+					</div>
+				)
+			}
+
 			return (
 				<div className="content">
-					<Grid fluid>
+					<Container fluid>
 						<Row>
 							<Col md={8}>
 								<Card
@@ -88,7 +96,7 @@ class UserProfile extends Component {
 														name: "sellerName",
 														onChange: this.handleChange,
 														type: "text",
-														bsClass: "form-control",
+														bsPrefix: "form-control",
 														placeholder: "Seller Name",
 														value: this.state.formData.sellerName || '',
 														disabled: true
@@ -98,7 +106,7 @@ class UserProfile extends Component {
 														type: "email",
 														name: "email",
 														onChange: this.handleChange,
-														bsClass: "form-control",
+														bsPrefix: "form-control",
 														placeholder: "Email",
 														value: this.state.formData.email || ''
 													}
@@ -112,7 +120,7 @@ class UserProfile extends Component {
 														type: "text",
 														name: "firstName",
 														onChange: this.handleChange,
-														bsClass: "form-control",
+														bsPrefix: "form-control",
 														placeholder: "First name",
 														value: this.state.formData.firstName || ''
 													},
@@ -121,7 +129,7 @@ class UserProfile extends Component {
 														type: "text",
 														name: "lastName",
 														onChange: this.handleChange,
-														bsClass: "form-control",
+														bsPrefix: "form-control",
 														placeholder: "Last name",
 														value: this.state.formData.lastName || ''
 													}
@@ -135,7 +143,7 @@ class UserProfile extends Component {
 														type: "text",
 														name: "phoneNo",
 														onChange: this.handleChange,
-														bsClass: "form-control",
+														bsPrefix: "form-control",
 														placeholder: "Phone No.",
 														value: this.state.formData.phoneNo || '',
 														disabled: true
@@ -150,7 +158,7 @@ class UserProfile extends Component {
 														type: "text",
 														name: "address",
 														onChange: this.handleChange,
-														bsClass: "form-control",
+														bsPrefix: "form-control",
 														placeholder: "Home Adress",
 														value: this.state.formData.address || ''
 													}
@@ -165,7 +173,7 @@ class UserProfile extends Component {
 														type: "text",
 														name: "city",
 														onChange: this.handleChange,
-														bsClass: "form-control",
+														bsPrefix: "form-control",
 														placeholder: "City",
 														value: this.state.formData.city || ''
 													},
@@ -174,7 +182,7 @@ class UserProfile extends Component {
 														type: "text",
 														name: "country",
 														onChange: this.handleChange,
-														bsClass: "form-control",
+														bsPrefix: "form-control",
 														placeholder: "Country",
 														value: this.state.formData.country || ''
 													},
@@ -183,7 +191,7 @@ class UserProfile extends Component {
 														name: "postalCode",
 														type: "number",
 														onChange: this.handleChange,
-														bsClass: "form-control",
+														bsPrefix: "form-control",
 														value: this.state.formData.postalCode || ''
 													}
 												]}
@@ -192,12 +200,12 @@ class UserProfile extends Component {
 											<Row>
 												<Col md={12}>
 													<FormGroup controlId="formControlsTextarea">
-														<ControlLabel>About Me</ControlLabel>
+														<FormLabel>About Me</FormLabel>
 														<FormControl
 															rows="5"
 															name="about"
-															componentClass="textarea"
-															bsClass="form-control"
+															as="textarea"
+															bsPrefix="form-control"
 															placeholder="Here can be your description"
 															onChange={this.handleChange}
 															value={this.state.formData.about || ''}
@@ -205,9 +213,9 @@ class UserProfile extends Component {
 													</FormGroup>
 												</Col>
 											</Row>
-											<Button bsStyle="info" pullRight fill type="submit">
+											<Button variant="info" pullRight fill type="submit">
 												Update Profile
-                    </Button>
+                    						</Button>
 											<div className="clearfix" />
 										</form>
 									}
@@ -236,7 +244,7 @@ class UserProfile extends Component {
 								/>
 							</Col>
 						</Row>
-					</Grid>
+					</Container>
 				</div>
 			);
 		}
